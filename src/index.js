@@ -19,25 +19,28 @@ function Square(props) {
         />
       );
     }
+    
+    ui(){
+      var arr1 = [0,1,2];
+      var arr2 = [];
+      
+      arr1.map(i=>(
+        arr2.push(
+          <div className="board-row" key = {i}>
+            {arr1.map(j => (
+                this.renderSquare(3*i + j)
+              ))}
+          </div>
+        )
+      ))
+      
+      return arr2
+    }
   
     render() {
       return (
         <div>
-          <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-          </div>
+          {this.ui()}
         </div>
       );
     }
@@ -161,4 +164,5 @@ function Square(props) {
     }
     return null;
   }
+  
   
