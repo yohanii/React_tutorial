@@ -53,7 +53,8 @@ function Square(props) {
           }
         ],
         stepNumber: 0,
-        xIsNext: true
+        xIsNext: true,
+        ihis : Array(9).fill(null),
       };
     }
   
@@ -61,10 +62,12 @@ function Square(props) {
       const history = this.state.history.slice(0, this.state.stepNumber + 1);
       const current = history[history.length - 1];
       const squares = current.squares.slice();
+      const ihis = this.state.ihis.slice();
       if (calculateWinner(squares) || squares[i]) {
         return;
       }
       squares[i] = this.state.xIsNext ? "X" : "O";
+      ihis[history.length] = i;
       this.setState({
         history: history.concat([
           {
@@ -72,7 +75,8 @@ function Square(props) {
           }
         ]),
         stepNumber: history.length,
-        xIsNext: !this.state.xIsNext
+        xIsNext: !this.state.xIsNext,
+        ihis : ihis,
       });
     }
   
@@ -87,10 +91,12 @@ function Square(props) {
       const history = this.state.history;
       const current = history[this.state.stepNumber];
       const winner = calculateWinner(current.squares);
+      const ihis = this.state.ihis;
   
       const moves = history.map((step, move) => {
+        const place = [parseInt(ihis[move]/3), ihis[move]%3];
         const desc = move ?
-          'Go to move #' + move :
+          'Go to move #' + move + ' place : '+ place:
           'Go to game start';
         return (
           <li key={move}>
@@ -147,5 +153,4 @@ function Square(props) {
     }
     return null;
   }
-  
   
