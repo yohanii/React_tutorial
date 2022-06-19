@@ -186,6 +186,3 @@ function Square(props) {
     }
     return null;
   }
-  
-  
-  
